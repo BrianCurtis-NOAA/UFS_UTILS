@@ -50,6 +50,8 @@ load(pathJoin("netcdf-fortran", netcdf_fortran_ver))
 bacio_ver=os.getenv("bacio_ver") or "2.4.1"
 load(pathJoin("bacio", bacio_ver))
 
+load(jasper)
+
 -- Uncomment when CHGRES_ALL is ON.
 --sfcio_ver=os.getenv("sfcio_ver") or "1.4.1"
 --load(pathJoin("sfcio", sfcio_ver))
