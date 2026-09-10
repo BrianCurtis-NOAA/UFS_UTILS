@@ -56,8 +56,8 @@ case ${MACHINE_ID,,} in
     nimbus)
         WORK_DIR="/home/${LOGNAME}/ufs_utils"
         HOMEreg="/home/${LOGNAME}/ufs_utils/reg_tests"
-        PROJECT_CODE="wcoss-eae-project-1"
-        QUEUE="compute"
+        PROJECT_CODE=""
+        QUEUE=""
         SCHEDULER="slurm"
         COMPILER="intel"
         ;;
