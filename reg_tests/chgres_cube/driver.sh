@@ -55,8 +55,9 @@ submit_test() {
     elif [[ "${SCHEDULER}" == "slurm" ]]; then
         export APRUN="srun"
         jobid=$(sbatch --parsable --partition="${partition}" ${slurmflag:+"${slurmflag}"} --ntasks-per-node="${ntasks_per_node}" --nodes="${nodes}" --mem="${mem}" -t "${walltime}" \
-                -A "${PROJECT_CODE}" -q "${QUEUE}" -J "${jobname}" --open-mode=append ${exclusive_flag:+"${exclusive_flag}"} \
+                -q "${QUEUE}" -J "${jobname}" --open-mode=append ${exclusive_flag:+"${exclusive_flag}"} \
                 ${dep_flag_slurm:+"${dep_flag_slurm}"} -o "${logfile}" -e "${logfile}" "./${script}")
+        # -A "${PROJECT_CODE}" 
     else
         echo "Error: Unsupported scheduler '${SCHEDULER}'"
         exit 1
