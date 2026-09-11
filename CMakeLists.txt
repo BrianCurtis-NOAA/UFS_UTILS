@@ -127,6 +127,7 @@ find_package(ip 3.3.3 REQUIRED)
 #endif()
 find_package(g2c)
 find_package(g2 3.4.3 REQUIRED)
+find_package(jasper)
 
 # If doxygen documentation we enabled, build it. This must come before
 # adding the source code directories; the main documentation build
