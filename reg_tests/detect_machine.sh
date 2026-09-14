@@ -27,7 +27,7 @@ case $(hostname -f) in
   dlogin0[1-9].dogwood.wcoss2.ncep.noaa.gov) MACHINE_ID=wcoss2 ;; ### dogwood01-9
   dlogin10.dogwood.wcoss2.ncep.noaa.gov)     MACHINE_ID=wcoss2 ;; ### dogwood10
 
-  wcoss3-login-0[1-9]) MACHINE_ID=nimbus ;; ### nimbus01-09
+  wcoss3-login-0[1-3]) MACHINE_ID=nimbus ;; ### nimbus01-03
 
   gaea5[1-8])          MACHINE_ID=gaeac5 ;; ### gaea51-58
   gaea5[1-8].ncrc.gov) MACHINE_ID=gaeac5 ;; ### gaea51-58

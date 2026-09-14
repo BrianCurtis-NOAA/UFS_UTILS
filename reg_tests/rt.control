@@ -59,7 +59,7 @@ case ${MACHINE_ID,,} in
         PROJECT_CODE=""
         QUEUE=""
         SCHEDULER="slurm"
-        COMPILER="intel"
+        COMPILER="intelllvm"
         ;;
     *)
         echo "Error: Unsupported machine '${MACHINE_ID}'"

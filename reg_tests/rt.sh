@@ -27,18 +27,33 @@ else
   ulimit -s unlimited
 fi
 
-if [[ "$(hostname)" =~ "WCOSS2" ]]; then
-  compiler="intel"
-else
-  compiler="intelllvm"
-fi
-export compiler
+# shellcheck source=../sorc/machine-setup.sh
+source ../sorc/machine-setup.sh
+
+# if [[ "$(hostname)" =~ "WCOSS2" ]]; then
+#   compiler="intel"
+# else
+#   compiler="intelllvm"
+# fi
+# export compiler
 
 # shellcheck source=./rt.control
 RT_DIR=${PWD}
 export RT_DIR
 source "${RT_DIR}/rt.control"
 
+compiler=${COMPILER}
+
+if [[ $MACHINE_ID == "nimbus" ]]; then
+  if [[ ${compiler} == "intelllvm" ]]; then
+    echo "COMPILER IS INTELLLVM"
+    . /opt/intel/oneapi/compiler/2026.1/env/vars.sh
+  elif [[ ${compiler} == "intel" ]]; then
+    echo "COMPILER IS INTEL"
+    . /opt/intel/oneapi/compiler/2023.2.1/env/vars.sh
+  fi
+  . /opt/intel/oneapi/mpi/2021.18/env/vars.sh
+fi
 
 mkdir -p "${WORK_DIR}"
 cd "${WORK_DIR}" || { echo "Can't change directory to '${WORK_DIR}'.. exiting"; exit; }
@@ -60,9 +75,6 @@ fi
 ###
 
 cd UFS_UTILS || { echo "Can't change directory into 'UFS_UTILS'.. exiting"; exit; }
-
-# shellcheck source=../sorc/machine-setup.sh
-source sorc/machine-setup.sh
 
 current_hash=$(git rev-parse HEAD)
 

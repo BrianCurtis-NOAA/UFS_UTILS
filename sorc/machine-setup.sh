@@ -29,7 +29,7 @@ elif [[ -d /lfs/h1 ]] ; then
     module reset
 elif [[ "$(hostname)" =~ "wcoss3"* ]]; then
     target=nimbus
-    module purge
+    # module purge
 elif [[ -d /opt/spack-stack && -d /lustre ]]; then
     # We are in a aws-ec2 cluster
     source /usr/share/lmod/lmod/init/$__ms_shell
