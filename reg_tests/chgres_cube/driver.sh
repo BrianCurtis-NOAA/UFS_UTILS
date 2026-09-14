@@ -76,11 +76,6 @@ submit_test() {
     TEST_IDS+=(":${jobid}")
 }
 
-if [[ $MACHINE_ID == "nimbus" ]]; then
-    . /opt/intel/oneapi/compiler/2023.2.1/env/vars.sh
-    . /opt/intel/oneapi/mpi/2021.18/env/vars.sh
-fi
-
 RT_DIR=${RT_DIR:-${PWD}/..}
 
 notlocal=${notlocal:-false}
