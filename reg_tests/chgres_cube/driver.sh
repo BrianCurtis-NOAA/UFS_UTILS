@@ -53,7 +53,7 @@ submit_test() {
                 -N "${jobname}" -l select=${nodes}:ncpus=${ntasks_per_node}:ompthreads=${OMP_NUM_THREADS}:mem=${mem} \
                 ${dep_flag_pbs:+"${dep_flag_pbs}"} ./${script})
     elif [[ "${SCHEDULER}" == "slurm" ]]; then
-        export APRUN="srun"
+        export APRUN="srun --mpi=pmi2"
         jobid=$(sbatch --parsable --partition="${partition}" ${slurmflag:+"${slurmflag}"} --ntasks-per-node="${ntasks_per_node}" --nodes="${nodes}" --mem="${mem}" -t "${walltime}" \
                 -J "${jobname}" --open-mode=append ${exclusive_flag:+"${exclusive_flag}"} \
                 ${dep_flag_slurm:+"${dep_flag_slurm}"} -o "${logfile}" -e "${logfile}" "./${script}")
