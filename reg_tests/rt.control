@@ -60,6 +60,14 @@ case ${MACHINE_ID,,} in
         QUEUE=""
         SCHEDULER="slurm"
         COMPILER="intelllvm"
+        export I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+        export PATH=$I_MPI_ROOT/bin:$PATH
+        export LD_LIBRARY_PATH=$I_MPI_ROOT/lib:$LD_LIBRARY_PATH
+        source /opt/intel/oneapi/compiler/2026.1/env/vars.sh
+
+        export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi2.so
+        export I_MPI_FABRICS=shm:ofi
+        export I_MPI_OFI_PROVIDER=tcp
         ;;
     *)
         echo "Error: Unsupported machine '${MACHINE_ID}'"

@@ -50,8 +50,6 @@ load(pathJoin("netcdf-fortran", netcdf_fortran_ver))
 bacio_ver=os.getenv("bacio_ver") or "2.4.1"
 load(pathJoin("bacio", bacio_ver))
 
-load(jasper)
-
 -- Uncomment when CHGRES_ALL is ON.
 --sfcio_ver=os.getenv("sfcio_ver") or "1.4.1"
 --load(pathJoin("sfcio", sfcio_ver))
@@ -94,6 +92,9 @@ load(pathJoin("nco", nco_ver))
 load("python/3.11.15")
 load("python-venv/1.0")
 load("py-pyyaml/6.0.3")
+
+load("parallelio")
+load("jasper")
 
 esmf_ver=os.getenv("esmf_ver") or "8.8.0"
 load(pathJoin("esmf", esmf_ver))
