@@ -100,8 +100,8 @@ load("pmix/5.0.11")
 esmf_ver=os.getenv("esmf_ver") or "8.8.0"
 load(pathJoin("esmf", esmf_ver))
 
---nccmp_ver=os.getenv("nccmp_ver") or "1.9.0.1"
---load(pathJoin("nccmp-D", nccmp_ver))
+nccmp_ver=os.getenv("nccmp_ver") or "1.9.0.1"
+load(pathJoin("nccmp", nccmp_ver))
 
 load("openblas/0.3.33")
 
