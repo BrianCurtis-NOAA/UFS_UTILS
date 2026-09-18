@@ -95,6 +95,7 @@ load("py-pyyaml/6.0.3")
 
 load("parallelio")
 load("jasper")
+load("pmix/5.0.11")
 
 esmf_ver=os.getenv("esmf_ver") or "8.8.0"
 load(pathJoin("esmf", esmf_ver))
