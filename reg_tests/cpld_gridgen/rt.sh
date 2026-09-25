@@ -65,7 +65,7 @@ test_name=cpld_gridgen
 STMP=${WORK_DIR:-?}
 export BASELINE_ROOT=${HOMEreg}/${test_name}/baseline_data
 export NCCMP=nccmp
-ACCOUNT=${PROJECT_CODE:?}
+ACCOUNT=${PROJECT_CODE:-}
 
 case ${MACHINE_ID} in
   orion)
