@@ -209,7 +209,7 @@ while read -r line || [ "$line" ]; do
   cp $PATHRT/parm/grid.nml.IN $RUNDIR
   cp $PATHTR/exec/cpld_gridgen $RUNDIR
 
-  submit_test ${i} ${NTASKS} 1 1G 0:${WLCLK}:00 ${PARTITION} ${slurmflag} false ${TEST_NAME} ${PATHRT}/cpld_gridgen.sh false
+  submit_test ${i} ${NTASKS} 1 1G 0:${WLCLK}:00 ${PARTITION} ${slurmflag} false ${TEST_NAME} cpld_gridgen.sh false
 #   if [[ $MACHINE_ID = wcoss2 ]]; then
     
     
@@ -234,7 +234,7 @@ while read -r line || [ "$line" ]; do
 done < ./rt.conf
 
 # Once all the jobs are finished, this summary job will run.
-submit_test end 1 1 100M 00:01:00 ${PARTITION} ${slurmflag} false cpld_gridgen_summary ${PATHRT}/rt_summary.sh "${TEST_IDS[@]}"
+submit_test end 1 1 100M 00:01:00 ${PARTITION} ${slurmflag} false cpld_gridgen_summary rt_summary.sh "${TEST_IDS[@]}"
 
 
 # if [[ $MACHINE_ID = wcoss2 ]]; then
