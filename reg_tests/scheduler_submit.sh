@@ -30,7 +30,7 @@ submit_test() {
     local jobname="$1"; shift
     local script="$1"; shift
     local remainingargs=("$@");
-    local waitonjobid=(printf '%s' "${remainingargs[@]}")
+    local waitonjobid=$(printf '%s' "${remainingargs[@]}")
 
     local logfile="${LOG_FILE}${logsuffix}"
 
