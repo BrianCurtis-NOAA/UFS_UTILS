@@ -136,6 +136,7 @@ submit_test() {
             exit 1
         fi
         TEST_IDS+=(":${jobid}")
+        echo ${TEST_IDS[@]}
     fi
     export TEST_IDS
 }
