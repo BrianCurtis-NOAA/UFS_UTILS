@@ -77,7 +77,7 @@ submit_test() {
             pbs_args+=(-l "${select_spec}")
         fi
         if [[ -n "${waitonjobid}" && "${waitonjobid}" != "false" ]]; then
-            pbs_args+=(-W "depend=afterok:${waitonjobid}")
+            pbs_args+=(-W "depend=afterok${waitonjobid}")
         fi
         if [[ ${END_SUBMIT} == "true" ]]; then
             pbs_args+=(-W "block=true")
@@ -113,7 +113,7 @@ submit_test() {
             slurm_args+=(--exclusive)
         fi
         if [[ -n "${waitonjobid}" && "${waitonjobid}" != "false" ]]; then
-            slurm_args+=(--dependency="afterok:${waitonjobid}")
+            slurm_args+=(--dependency="afterok${waitonjobid}")
         fi
         if [[ -n "${logfile}" && "${logfile}" != "false" ]]; then
             slurm_args+=(-o "${logfile}" -e "${logfile}")
@@ -137,7 +137,6 @@ submit_test() {
             exit 1
         fi
         TEST_IDS+=(":${jobid}")
-        echo ${TEST_IDS[@]}
     fi
     export TEST_IDS
 }
