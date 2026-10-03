@@ -223,7 +223,6 @@ case ${MACHINE_ID,,} in
         submit_test 12 6 1 75G 0:10:00 compute false false 25km.conus.gfs.pbgrib2 25km.conus.gfs.pbgrib2.sh false
         submit_test 13 6 1 75G 0:05:00 compute false false c96.gefs.grib2 c96.gefs.grib2.sh false
         submit_test 14 6 1 75G 0:10:00 compute false false 13km.conus.rap-smoke.grib2 13km.conus.rap-smoke.grib2.sh false
-        submit_test end 1 1 100M 00:01:00 compute false false chgres_summary tmp_sub.sh false
         ;;
     *)
         echo "Error: Unsupported machine '${MACHINE_ID}'"
