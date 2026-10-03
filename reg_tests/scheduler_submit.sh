@@ -29,7 +29,8 @@ submit_test() {
     local exclusive="$1"; shift
     local jobname="$1"; shift
     local script="$1"; shift
-    local waitonjobid=(printf '%s' "$@");
+    local waitonjobid=("$@");
+    waitonjobid=(printf '%s' "${waitonjobid[@]}")
 
     local logfile="${LOG_FILE}${logsuffix}"
 
