@@ -32,6 +32,8 @@ submit_test() {
     local remainingargs=("$@");
     local waitonjobid=$(printf '%s' "${remainingargs[@]}")
 
+    LOG_FILE=${LOG_FILE:-"slurm_job"}
+
     local logfile="${LOG_FILE}${logsuffix}"
 
     export OMP_NUM_THREADS=1  # should match cpus-per-task
