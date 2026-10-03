@@ -137,5 +137,5 @@ submit_test() {
         fi
         TEST_IDS+=(":${jobid}")
     fi
-    
+    export TEST_IDS
 }

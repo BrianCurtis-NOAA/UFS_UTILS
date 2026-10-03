@@ -258,7 +258,7 @@ else
     echo "Error: Unsupported scheduler '${SCHEDULER}'"
     exit 1
 fi
-submit_test end 1 1 100M 00:01:00 compute false false chgres_summary tmp_sub.sh false
+submit_test end 1 1 100M 00:01:00 compute false false summary tmp_sub.sh ${TEST_IDS[@]}
 
 echo "Waiting for summary log to get generated..."
 TIMEOUT_LIMIT=${TIMEOUT_LIMIT:?}  # default to 1 hour
