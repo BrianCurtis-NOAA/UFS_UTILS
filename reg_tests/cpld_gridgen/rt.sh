@@ -31,6 +31,8 @@ usage_and_exit() {
     exit $1
 }
 
+source ../scheduler_submit.sh
+
 readonly program=$(basename $0)
 
 RT_DIR=${RT_DIR:-${PWD}/..}
