@@ -120,6 +120,8 @@ submit_test() {
         if [[ -n "${logfile}" && "${logfile}" != "false" ]]; then
             slurm_args+=(-o "${logfile}" -e "${logfile}")
         fi
+        echo ${PWD}
+        echo ${script}
         jobid=$(sbatch "${slurm_args[@]}" "./${script}")
     else
         echo "Error: Unsupported scheduler '${SCHEDULER}'"
@@ -127,7 +129,7 @@ submit_test() {
     fi
     status=$?
     if [ $status -ne 0 ]; then
-        echo "Error submitting job: $output"
+        echo "Error submitting job: ${jobid}"
         exit 1
     fi
  
