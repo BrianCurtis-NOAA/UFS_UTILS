@@ -230,7 +230,7 @@ while read -r line || [ "$line" ]; do
 done < ./rt.conf
 
 # Once all the jobs are finished, this summary job will run.
-submit_test end 1 1 100M 00:01:00 ${QUEUE} ${slurmflag} false cpld_gridgen_summary rt_summary.sh false
+submit_test end 1 1 100M 00:01:00 ${QUEUE} ${slurmflag} false cpld_gridgen_summary rt_summary.sh "${TEST_IDS[@]}"
 
 
 # if [[ $MACHINE_ID = wcoss2 ]]; then
