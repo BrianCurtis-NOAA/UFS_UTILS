@@ -84,7 +84,7 @@ submit_test() {
         if [[ ${END_SUBMIT} == "true" ]]; then
             pbs_args+=(-W "block=true")
         fi
-        jobid=$(qsub "${pbs_args[@]}" "./${script}")
+        jobid=$(qsub "${pbs_args[@]}" "${script}")
     elif [[ "${SCHEDULER}" == "slurm" ]]; then
         export APRUN="srun --mpi=pmi2"
         # SLURM Items
@@ -122,7 +122,7 @@ submit_test() {
         fi
         echo ${PWD}
         echo ${script}
-        jobid=$(sbatch "${slurm_args[@]}" "./${script}")
+        jobid=$(sbatch "${slurm_args[@]}" "${script}")
     else
         echo "Error: Unsupported scheduler '${SCHEDULER}'"
         exit 1
