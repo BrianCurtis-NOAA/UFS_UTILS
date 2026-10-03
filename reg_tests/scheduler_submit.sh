@@ -131,6 +131,7 @@ submit_test() {
     if [[ ${END_SUBMIT} != "true" ]]; then
         jobid=${jobid%.*}
         jobid=${jobid%%;*}
+        jobid=${jobid%%+([[:space:]])}
         if [[ "${jobid}" == "" ]]; then
             echo "Error submitting job to slurm scheduler"
             exit 1
