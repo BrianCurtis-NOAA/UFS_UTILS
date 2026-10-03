@@ -172,6 +172,8 @@ rm -f fail_test* nccmp_*.log summary.log run_*log RegressionTests_${MACHINE_ID,,
 # Kick off all tests.
 if [[ ${MACHINE_ID} = gaeac6 ]]; then
   slurmflag=${"c6":-false}
+else
+  slurmflag=false
 fi
 
 i=0
