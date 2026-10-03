@@ -17,7 +17,7 @@
 #-----------------------------------------------------------------------------
 
 set -x
-. scheduler_submit.sh
+source ../scheduler_submit.sh
 # submit_test() {
 #     local suffix="$1"; shift
 #     local ntasks_per_node="$1"; shift
