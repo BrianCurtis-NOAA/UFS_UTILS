@@ -29,8 +29,8 @@ submit_test() {
     local exclusive="$1"; shift
     local jobname="$1"; shift
     local script="$1"; shift
-    local waitonjobid=("$@");
-    waitonjobid=$(printf '%s' "${waitonjobid[@]}")
+    local remainingargs=("$@");
+    local waitonjobid=(printf '%s' "${remainingargs[@]}")
 
     local logfile="${LOG_FILE}${logsuffix}"
 
@@ -77,7 +77,7 @@ submit_test() {
             pbs_args+=(-l "${select_spec}")
         fi
         if [[ -n "${waitonjobid}" && "${waitonjobid}" != "false" ]]; then
-            pbs_args+=(-W "depend=afterok:${waitonjobid[@]}")
+            pbs_args+=(-W "depend=afterok:${waitonjobid}")
         fi
         if [[ ${END_SUBMIT} == "true" ]]; then
             pbs_args+=(-W "block=true")
@@ -113,7 +113,7 @@ submit_test() {
             slurm_args+=(--exclusive)
         fi
         if [[ -n "${waitonjobid}" && "${waitonjobid}" != "false" ]]; then
-            slurm_args+=(--dependency="afterok:${waitonjobid[@]}")
+            slurm_args+=(--dependency="afterok:${waitonjobid}")
         fi
         if [[ -n "${logfile}" && "${logfile}" != "false" ]]; then
             slurm_args+=(-o "${logfile}" -e "${logfile}")
