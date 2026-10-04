@@ -147,7 +147,6 @@ case ${MACHINE_ID,,} in
         submit_test 06 12 1 15G 0:05:00 false C192.gsitile_lndincsoilnoahmp C192.gsitile_lndincsoilnoahmp.sh false
         ;;
     nimbus)
-        wcoss2)
         submit_test 01 12 1 15G 0:05:00 false C768.fv3gfs C768.fv3gfs.sh false
         submit_test 03 12 1 15G 0:05:00 false C768.lndincsnow C768.lndincsnow.sh false
         submit_test 04 12 1 15G 0:05:00 false C48.noahmp.coupled C48.noahmp.coupled.sh false
