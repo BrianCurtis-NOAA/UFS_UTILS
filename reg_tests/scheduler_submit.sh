@@ -24,7 +24,7 @@ submit_test() {
     local nodes="$1"; shift
     local mem="$1"; shift
     local walltime="$1"; shift
-    local partition="$1"; shift
+    #local partition="$1"; shift #LETS PROVIDE THIS IN THE RT.CONTROL FILE
     local slurmcluster="$1"; shift
     local exclusive="$1"; shift
     local jobname="$1"; shift
@@ -33,6 +33,7 @@ submit_test() {
     local waitonjobid=$(printf '%s' "${remainingargs[@]}")
 
     LOG_FILE=${LOG_FILE:-"slurm_job"}
+    PARTITION=${PARTITION:?}
 
     local logfile="${LOG_FILE}${logsuffix}"
 

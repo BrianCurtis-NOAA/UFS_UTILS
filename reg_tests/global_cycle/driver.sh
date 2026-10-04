@@ -18,65 +18,65 @@
 #-----------------------------------------------------------------------------
 
 set -x
+source ../scheduler_submit.sh
+# submit_test() {
+#     local suffix="$1"; shift
+#     local ntasks_per_node="$1"; shift
+#     local nodes="$1"; shift
+#     local mem="$1"; shift
+#     local walltime="$1"; shift
+#     local partition="$1"; shift
+#     local slurmcluster="$1"; shift
+#     local exclusive="$1"; shift
+#     local jobname="$1"; shift
+#     local script="$1"; shift
+#     local waitonjobid="$1"; shift
 
-submit_test() {
-    local suffix="$1"; shift
-    local ntasks_per_node="$1"; shift
-    local nodes="$1"; shift
-    local mem="$1"; shift
-    local walltime="$1"; shift
-    local partition="$1"; shift
-    local slurmcluster="$1"; shift
-    local exclusive="$1"; shift
-    local jobname="$1"; shift
-    local script="$1"; shift
-    local waitonjobid="$1"; shift
-
-    local logfile="${LOG_FILE}${suffix}"
+#     local logfile="${LOG_FILE}${suffix}"
     
-    export DATA="${DATA_DIR}/test${suffix}"
-    export COMOUT=$DATA
+#     export DATA="${DATA_DIR}/test${suffix}"
+#     export COMOUT=$DATA
 
-    if [[ "${exclusive}" == "true" ]]; then
-        exclusive_flag="--exclusive"
-    fi
+#     if [[ "${exclusive}" == "true" ]]; then
+#         exclusive_flag="--exclusive"
+#     fi
 
-    if [[ "${slurmcluster}" != "false" ]]; then
-        slurmflag="--clusters=${slurmcluster}"
-    fi
+#     if [[ "${slurmcluster}" != "false" ]]; then
+#         slurmflag="--clusters=${slurmcluster}"
+#     fi
 
-    if [[ "${waitonjobid}" != "false" ]]; then
-        dep_flag_slurm="--dependency=afterok:${waitonjobid}"
-        dep_flag_pbs="-W depend=afterok:${waitonjobid}"
-    fi
+#     if [[ "${waitonjobid}" != "false" ]]; then
+#         dep_flag_slurm="--dependency=afterok:${waitonjobid}"
+#         dep_flag_pbs="-W depend=afterok:${waitonjobid}"
+#     fi
 
-    if [[ "${SCHEDULER}" == "pbs" ]]; then
-        export APRUNCY="mpiexec -n ${ntasks_per_node} -ppn ${ntasks_per_node} --cpu-bind core --depth ${OMP_NUM_THREADS_CY}"
-        jobid=$(qsub -V -o "${logfile}" -e "${logfile}" -q "${QUEUE}" -A "${PROJECT_CODE}" -l walltime=${walltime} \
-                -N "${jobname}" -l select=${nodes}:ncpus=${ntasks_per_node}:ompthreads=1:mem=${mem} \
-                ${dep_flag_pbs:+"${dep_flag_pbs}"}"./${script}")
-    elif [[ "${SCHEDULER}" == "slurm" ]]; then
-        export APRUNCY="srun"
-        jobid=$(sbatch --parsable --partition="${partition}" ${slurmflag:+"${slurmflag}"} --ntasks-per-node="${ntasks_per_node}" --nodes="${nodes}" --mem="${mem}" -t "${walltime}" \
-               -A "${PROJECT_CODE}" -q "${QUEUE}" -J "${jobname}" --open-mode=append ${exclusive_flag:+"${exclusive_flag}"} \
-               ${dep_flag_slurm:+"${dep_flag_slurm}"} -o "${logfile}" -e "${logfile}" "./${script}")
-    else
-        echo "Error: Unsupported scheduler '${SCHEDULER}'"
-        exit 1
-    fi
-    status=$?
-    if [ $status -ne 0 ]; then
-        echo "Error submitting job: $output"
-        exit 1
-    fi
-    jobid=${jobid%.*}
-    jobid=${jobid%%;*}
-    if [[ "${jobid}" == "" ]]; then
-        echo "Error submitting job to slurm scheduler"
-        exit 1
-    fi
-    TEST_IDS+=(":${jobid}")
-}
+#     if [[ "${SCHEDULER}" == "pbs" ]]; then
+#         export APRUNCY="mpiexec -n ${ntasks_per_node} -ppn ${ntasks_per_node} --cpu-bind core --depth ${OMP_NUM_THREADS_CY}"
+#         jobid=$(qsub -V -o "${logfile}" -e "${logfile}" -q "${QUEUE}" -A "${PROJECT_CODE}" -l walltime=${walltime} \
+#                 -N "${jobname}" -l select=${nodes}:ncpus=${ntasks_per_node}:ompthreads=1:mem=${mem} \
+#                 ${dep_flag_pbs:+"${dep_flag_pbs}"}"./${script}")
+#     elif [[ "${SCHEDULER}" == "slurm" ]]; then
+#         export APRUNCY="srun"
+#         jobid=$(sbatch --parsable --partition="${partition}" ${slurmflag:+"${slurmflag}"} --ntasks-per-node="${ntasks_per_node}" --nodes="${nodes}" --mem="${mem}" -t "${walltime}" \
+#                -A "${PROJECT_CODE}" -q "${QUEUE}" -J "${jobname}" --open-mode=append ${exclusive_flag:+"${exclusive_flag}"} \
+#                ${dep_flag_slurm:+"${dep_flag_slurm}"} -o "${logfile}" -e "${logfile}" "./${script}")
+#     else
+#         echo "Error: Unsupported scheduler '${SCHEDULER}'"
+#         exit 1
+#     fi
+#     status=$?
+#     if [ $status -ne 0 ]; then
+#         echo "Error submitting job: $output"
+#         exit 1
+#     fi
+#     jobid=${jobid%.*}
+#     jobid=${jobid%%;*}
+#     if [[ "${jobid}" == "" ]]; then
+#         echo "Error submitting job to slurm scheduler"
+#         exit 1
+#     fi
+#     TEST_IDS+=(":${jobid}")
+# }
 
 RT_DIR=${RT_DIR:-${PWD}/..}
 notlocal=${notlocal:-false}
