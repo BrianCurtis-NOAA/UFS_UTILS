@@ -112,44 +112,47 @@ declare -a TEST_IDS=()
 
 case ${MACHINE_ID,,} in
     hercules)
-        submit_test 01 6 1 50G 0:05:00 hercules false false C768.fv3gfs C768.fv3gfs.sh false
-        #submit_test 02 6 1 50G 0:05:00 hercules false false C192.gsi_lndincsoilnoahmp C192.gsi_lndincsoilnoahmp.sh false
-        submit_test 03 6 1 50G 0:05:00 hercules false false C768.lndincsnow C768.lndincsnow.sh false
-        submit_test 04 6 1 50G 0:05:00 hercules false false C48.noahmp.coupled C48.noahmp.coupled.sh false
-        submit_test 05 6 1 50G 0:05:00 hercules false false C192.jedi_lndincsoilnoahmp C192.jedi_lndincsoilnoahmp.sh false
-        submit_test 06 6 1 50G 0:05:00 hercules false false C192.gsitile_lndincsoilnoahmp C192.gsitile_lndincsoilnoahmp.sh false
+        submit_test 01 6 1 50G 0:05:00 false C768.fv3gfs C768.fv3gfs.sh false
+        submit_test 03 6 1 50G 0:05:00 false C768.lndincsnow C768.lndincsnow.sh false
+        submit_test 04 6 1 50G 0:05:00 false C48.noahmp.coupled C48.noahmp.coupled.sh false
+        submit_test 05 6 1 50G 0:05:00 false C192.jedi_lndincsoilnoahmp C192.jedi_lndincsoilnoahmp.sh false
+        submit_test 06 6 1 50G 0:05:00 false C192.gsitile_lndincsoilnoahmp C192.gsitile_lndincsoilnoahmp.sh false
         ;;
     orion)
-        submit_test 01 6 1 50G 0:05:00 orion false false C768.fv3gfs C768.fv3gfs.sh false
-        #submit_test 02 6 1 50G 0:05:00 orion false false C192.gsi_lndincsoilnoahmp C192.gsi_lndincsoilnoahmp.sh false
-        submit_test 03 6 1 50G 0:05:00 orion false false C768.lndincsnow C768.lndincsnow.sh false
-        submit_test 04 6 1 50G 0:05:00 orion false false C48.noahmp.coupled C48.noahmp.coupled.sh false
-        submit_test 05 6 1 50G 0:05:00 orion false false C192.jedi_lndincsoilnoahmp C192.jedi_lndincsoilnoahmp.sh false
-        submit_test 06 6 1 50G 0:05:00 orion false false C192.gsitile_lndincsoilnoahmp C192.gsitile_lndincsoilnoahmp.sh false
+        submit_test 01 6 1 50G 0:05:00 false C768.fv3gfs C768.fv3gfs.sh false
+        submit_test 03 6 1 50G 0:05:00 false C768.lndincsnow C768.lndincsnow.sh false
+        submit_test 04 6 1 50G 0:05:00 false C48.noahmp.coupled C48.noahmp.coupled.sh false
+        submit_test 05 6 1 50G 0:05:00 false C192.jedi_lndincsoilnoahmp C192.jedi_lndincsoilnoahmp.sh false
+        submit_test 06 6 1 50G 0:05:00 false C192.gsitile_lndincsoilnoahmp C192.gsitile_lndincsoilnoahmp.sh false
         ;;
     ursa)
-        submit_test 01 6 1 50G 0:05:00 u1-compute false false C768.fv3gfs C768.fv3gfs.sh false
-        #submit_test 02 6 1 50G 0:05:00 u1-compute false false C192.gsi_lndincsoilnoahmp C192.gsi_lndincsoilnoahmp.sh false
-        submit_test 03 6 1 50G 0:05:00 u1-compute false false C768.lndincsnow C768.lndincsnow.sh false
-        submit_test 04 6 1 50G 0:05:00 u1-compute false false C48.noahmp.coupled C48.noahmp.coupled.sh false
-        submit_test 05 6 1 50G 0:05:00 u1-compute false false C192.jedi_lndincsoilnoahmp C192.jedi_lndincsoilnoahmp.sh false
-        submit_test 06 6 1 50G 0:05:00 u1-compute false false C192.gsitile_lndincsoilnoahmp C192.gsitile_lndincsoilnoahmp.sh false
+        submit_test 01 6 1 50G 0:05:00 false C768.fv3gfs C768.fv3gfs.sh false
+        submit_test 03 6 1 50G 0:05:00 false C768.lndincsnow C768.lndincsnow.sh false
+        submit_test 04 6 1 50G 0:05:00 false C48.noahmp.coupled C48.noahmp.coupled.sh false
+        submit_test 05 6 1 50G 0:05:00 false C192.jedi_lndincsoilnoahmp C192.jedi_lndincsoilnoahmp.sh false
+        submit_test 06 6 1 50G 0:05:00 false C192.gsitile_lndincsoilnoahmp C192.gsitile_lndincsoilnoahmp.sh false
         ;;
     gaeac6)
-        submit_test 01 6 1 0 0:05:00 batch c6 false C768.fv3gfs C768.fv3gfs.sh false
-        #submit_test 02 6 1 0 0:05:00 batch c6 false C192.gsi_lndincsoilnoahmp C192.gsi_lndincsoilnoahmp.sh false
-        submit_test 03 6 1 0 0:05:00 batch c6 false C768.lndincsnow C768.lndincsnow.sh false
-        submit_test 04 6 1 0 0:05:00 batch c6 false C48.noahmp.coupled C48.noahmp.coupled.sh false
-        submit_test 05 6 1 0 0:05:00 batch c6 false C192.jedi_lndincsoilnoahmp C192.jedi_lndincsoilnoahmp.sh false
-        submit_test 06 6 1 0 0:05:00 batch c6 false C192.gsitile_lndincsoilnoahmp C192.gsitile_lndincsoilnoahmp.sh false
+        submit_test 01 6 1 0 0:05:00 false C768.fv3gfs C768.fv3gfs.sh false
+        submit_test 03 6 1 0 0:05:00 false C768.lndincsnow C768.lndincsnow.sh false
+        submit_test 04 6 1 0 0:05:00 false C48.noahmp.coupled C48.noahmp.coupled.sh false
+        submit_test 05 6 1 0 0:05:00 false C192.jedi_lndincsoilnoahmp C192.jedi_lndincsoilnoahmp.sh false
+        submit_test 06 6 1 0 0:05:00 false C192.gsitile_lndincsoilnoahmp C192.gsitile_lndincsoilnoahmp.sh false
         ;;
     wcoss2)
-        submit_test 01 12 1 15G 0:05:00 dev false false C768.fv3gfs C768.fv3gfs.sh false
-        #submit_test 02 12 1 15G 0:05:00 dev false false C192.gsi_lndincsoilnoahmp C192.gsi_lndincsoilnoahmp.sh false
-        submit_test 03 12 1 15G 0:05:00 dev false false C768.lndincsnow C768.lndincsnow.sh false
-        submit_test 04 12 1 15G 0:05:00 dev false false C48.noahmp.coupled C48.noahmp.coupled.sh false
-        submit_test 05 12 1 15G 0:05:00 dev false false C192.jedi_lndincsoilnoahmp C192.jedi_lndincsoilnoahmp.sh false
-        submit_test 06 12 1 15G 0:05:00 dev false false C192.gsitile_lndincsoilnoahmp C192.gsitile_lndincsoilnoahmp.sh false
+        submit_test 01 12 1 15G 0:05:00 false C768.fv3gfs C768.fv3gfs.sh false
+        submit_test 03 12 1 15G 0:05:00 false C768.lndincsnow C768.lndincsnow.sh false
+        submit_test 04 12 1 15G 0:05:00 false C48.noahmp.coupled C48.noahmp.coupled.sh false
+        submit_test 05 12 1 15G 0:05:00 false C192.jedi_lndincsoilnoahmp C192.jedi_lndincsoilnoahmp.sh false
+        submit_test 06 12 1 15G 0:05:00 false C192.gsitile_lndincsoilnoahmp C192.gsitile_lndincsoilnoahmp.sh false
+        ;;
+    nimbus)
+        wcoss2)
+        submit_test 01 12 1 15G 0:05:00 false C768.fv3gfs C768.fv3gfs.sh false
+        submit_test 03 12 1 15G 0:05:00 false C768.lndincsnow C768.lndincsnow.sh false
+        submit_test 04 12 1 15G 0:05:00 false C48.noahmp.coupled C48.noahmp.coupled.sh false
+        submit_test 05 12 1 15G 0:05:00 false C192.jedi_lndincsoilnoahmp C192.jedi_lndincsoilnoahmp.sh false
+        submit_test 06 12 1 15G 0:05:00 false C192.gsitile_lndincsoilnoahmp C192.gsitile_lndincsoilnoahmp.sh false
         ;;
     *)
         echo "Error: Unsupported machine '${MACHINE_ID}'"
@@ -158,22 +161,24 @@ case ${MACHINE_ID,,} in
 esac
 
 if [[ "${SCHEDULER}" == "pbs" ]]; then
-  (qsub -V -o ${LOG_FILE} -e ${LOG_FILE} -q $QUEUE -A $PROJECT_CODE -l walltime=00:01:00 \
-        -N cycle_summary -l select=1:ncpus=1:mem=100MB -W depend="afterany$(echo "${TEST_IDS[*]}" | tr -d '[:space:]')" << EOF
+#   (qsub -V -o ${LOG_FILE} -e ${LOG_FILE} -q $QUEUE -A $PROJECT_CODE -l walltime=00:01:00 \
+#         -N cycle_summary -l select=1:ncpus=1:mem=100MB -W depend="afterany$(echo "${TEST_IDS[*]}" | tr -d '[:space:]')"
+    cat << EOF > tmp_sub.sh
 #!/bin/bash
 cd $reg_dir
 grep -a '^<<<' ${LOG_FILE}* | grep -v echo > summary.log
 EOF
-  ) &
+#   ) &
 elif [[ "${SCHEDULER}" == "slurm" ]]; then
-  (sbatch --nodes=1 -t 0:01:00 -A $PROJECT_CODE ${slurmflag:+"${slurmflag}"} -J chgres_summary -o $LOG_FILE -e $LOG_FILE \
-      --open-mode=append -q $QUEUE \
-      -d "afterany$(echo "${TEST_IDS[*]}" | tr -d '[:space:]')" << EOF
+#   (sbatch --nodes=1 -t 0:01:00 -A $PROJECT_CODE ${slurmflag:+"${slurmflag}"} -J chgres_summary -o $LOG_FILE -e $LOG_FILE \
+#       --open-mode=append -q $QUEUE \
+#       -d "afterany$(echo "${TEST_IDS[*]}" | tr -d '[:space:]')"
+    cat << EOF > tmp_sub.sh
 #!/bin/bash
 cd $reg_dir
 grep -a '^<<<' ${LOG_FILE}*  > summary.log
 EOF
-  ) &
+#   ) &
 else
     echo "Error: Unsupported scheduler '${SCHEDULER}'"
     exit 1

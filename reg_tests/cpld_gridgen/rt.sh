@@ -73,33 +73,33 @@ case ${MACHINE_ID} in
   orion)
     export MOM6_FIXDIR=/work/noaa/global/glopara/fix/mom6/${MOM6_version}
     WLCLK=120
-    PARTITION=orion
+    #PARTITION=orion
     ;;
   hercules)
     export MOM6_FIXDIR=/work/noaa/global/glopara/fix/mom6/${MOM6_version}
     WLCLK=120
-    PARTITION=hercules
+    #PARTITION=hercules
     ;;
   ursa)
     export MOM6_FIXDIR=/scratch3/NCEPDEV/global/role.glopara/fix/mom6/${MOM6_version}
     WLCLK=40
-    PARTITION=u1-compute
+    #PARTITION=u1-compute
     ;;
   gaeac6)
     export MOM6_FIXDIR=/gpfs/f6/drsa-precip3/world-shared/role.glopara/fix/mom6/${MOM6_version}
     WLCLK=40
-    PARTITION=batch
+    #PARTITION=batch
     ;;
   wcoss2)
     export APRUN="mpiexec -n 12 -ppn 12 --cpu-bind core"
     export MOM6_FIXDIR=/lfs/h2/emc/global/noscrub/emc.global/FIX/fix/mom6/${MOM6_version}
     WLCLK=60
-    PARTITION=dev
+    #PARTITION=dev
     ;;
   nimbus)
     export MOM6_FIXDIR=/home/${LOGNAME}/ufs_utils/fix/mom6/${MOM6_version}
     WLCLK=60
-    PARTITION=compute
+    #PARTITION=compute
     ;;
   *)
     error "Unknown machine ${MACHINE_ID}"
@@ -211,7 +211,7 @@ while read -r line || [ "$line" ]; do
 
   RESNAME=${TEST_NAME}
   export RESNAME ATMLIST
-  submit_test ${i} ${NTASKS} 1 100G 0:${WLCLK}:00 ${PARTITION} ${slurmflag} false ${TEST_NAME} cpld_gridgen.sh false
+  submit_test ${i} ${NTASKS} 1 100G 0:${WLCLK}:00 false ${TEST_NAME} cpld_gridgen.sh false
 #   if [[ $MACHINE_ID = wcoss2 ]]; then
     
     
@@ -237,7 +237,7 @@ done < ./rt.conf
 
 # Once all the jobs are finished, this summary job will run.
 
-submit_test end 1 1 100M 00:01:00 ${PARTITION} ${slurmflag} false cpld_gridgen_summary rt.summary.sh "${TEST_IDS[@]}"
+submit_test end 1 1 100M 00:01:00 false cpld_gridgen_summary rt.summary.sh "${TEST_IDS[@]}"
 
 
 # if [[ $MACHINE_ID = wcoss2 ]]; then
