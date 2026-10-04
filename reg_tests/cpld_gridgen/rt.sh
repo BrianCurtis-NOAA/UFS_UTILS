@@ -211,7 +211,7 @@ while read -r line || [ "$line" ]; do
 
   RESNAME=${TEST_NAME}
   export RESNAME ATMLIST
-  submit_test ${i} ${NTASKS} 1 1G 0:${WLCLK}:00 ${PARTITION} ${slurmflag} false ${TEST_NAME} cpld_gridgen.sh false
+  submit_test ${i} ${NTASKS} 1 100G 0:${WLCLK}:00 ${PARTITION} ${slurmflag} false ${TEST_NAME} cpld_gridgen.sh false
 #   if [[ $MACHINE_ID = wcoss2 ]]; then
     
     
