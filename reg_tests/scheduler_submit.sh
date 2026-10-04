@@ -33,7 +33,7 @@ submit_test() {
     local waitonjobid=$(printf '%s' "${remainingargs[@]}")
 
     LOG_FILE=${LOG_FILE:-"slurm_job"}
-    PARTITION=${PARTITION:?}
+    local partition=${PARTITION:?}
 
     local logfile="${LOG_FILE}${logsuffix}"
 
