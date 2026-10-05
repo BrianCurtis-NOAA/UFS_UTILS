@@ -42,6 +42,7 @@ submit_test() {
 
     if [[ "${SCHEDULER}" == "pbs" ]]; then
         export APRUN="mpiexec -n ${ntasks_per_node} -ppn ${ntasks_per_node} --cpu-bind core"
+        export APRUNCY="${APRUN} --depth ${OMP_NUM_THREADS}"
         local pbs_args=(-V)
         if [[ -n "${logfile}" && "${logfile}" != "false" ]]; then
             pbs_args+=(-o "${logfile}" -e "${logfile}")
@@ -89,6 +90,7 @@ submit_test() {
         jobid=$(qsub "${pbs_args[@]}" "./${script}")
     elif [[ "${SCHEDULER}" == "slurm" ]]; then
         export APRUN="srun --mpi=pmi2"
+        export APRUNCY="${APRUN}"
         # SLURM Items
         local slurm_args=(--parsable)
         if [[ -n "${partition}" && "${partition}" != "false" ]]; then
