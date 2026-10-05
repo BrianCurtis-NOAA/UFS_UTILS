@@ -38,11 +38,12 @@ submit_test() {
 
     local logfile="${LOG_FILE}${logsuffix}"
 
-    export OMP_NUM_THREADS=1  # should match cpus-per-task
+    export OMP_NUM_THREADS=${ntasks_per_node}  # should match cpus-per-task
 
     if [[ "${SCHEDULER}" == "pbs" ]]; then
         export APRUN="mpiexec -n ${ntasks_per_node} -ppn ${ntasks_per_node} --cpu-bind core"
         export APRUNCY="${APRUN} --depth ${OMP_NUM_THREADS}"
+        export APRUN_SFC=${APRUNCY}
         local pbs_args=(-V)
         if [[ -n "${logfile}" && "${logfile}" != "false" ]]; then
             pbs_args+=(-o "${logfile}" -e "${logfile}")
@@ -91,6 +92,7 @@ submit_test() {
     elif [[ "${SCHEDULER}" == "slurm" ]]; then
         export APRUN="srun --mpi=pmi2"
         export APRUNCY="${APRUN}"
+        export APRUN_SFC=${APRUNCY}
         # SLURM Items
         local slurm_args=(--parsable)
         if [[ -n "${partition}" && "${partition}" != "false" ]]; then
