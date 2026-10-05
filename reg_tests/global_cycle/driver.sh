@@ -33,9 +33,6 @@ source ../scheduler_submit.sh
 #     local waitonjobid="$1"; shift
 
 #     local logfile="${LOG_FILE}${suffix}"
-    
-#     export DATA="${DATA_DIR}/test${suffix}"
-#     export COMOUT=$DATA
 
 #     if [[ "${exclusive}" == "true" ]]; then
 #         exclusive_flag="--exclusive"
@@ -101,6 +98,9 @@ OMP_NUM_THREADS_CY=2
 OMP_PLACES=cores
 NWPROD="${WORK_DIR}/UFS_UTILS"
 
+    export DATA="${DATA_DIR}/test${suffix}"
+    export COMOUT=$DATA
+
 export DATA_DIR OMP_NUM_THREADS_CY OMP_PLACES HOMEreg NWPROD
 LOG_FILE=consistency.log
 SUM_FILE=summary.log
@@ -112,7 +112,11 @@ declare -a TEST_IDS=()
 
 case ${MACHINE_ID,,} in
     hercules)
+        export DATA="${DATA_DIR}/test1"
+        export COMOUT=$DATA
         submit_test 01 6 1 50G 0:05:00 false C768.fv3gfs C768.fv3gfs.sh false
+        export DATA="${DATA_DIR}/test1"
+        export COMOUT=$DATA
         submit_test 03 6 1 50G 0:05:00 false C768.lndincsnow C768.lndincsnow.sh false
         submit_test 04 6 1 50G 0:05:00 false C48.noahmp.coupled C48.noahmp.coupled.sh false
         submit_test 05 6 1 50G 0:05:00 false C192.jedi_lndincsoilnoahmp C192.jedi_lndincsoilnoahmp.sh false
@@ -147,10 +151,20 @@ case ${MACHINE_ID,,} in
         submit_test 06 12 1 15G 0:05:00 false C192.gsitile_lndincsoilnoahmp C192.gsitile_lndincsoilnoahmp.sh false
         ;;
     nimbus)
+        export DATA="${DATA_DIR}/test1"
+        export COMOUT=$DATA
         submit_test 01 12 1 15G 0:05:00 false C768.fv3gfs C768.fv3gfs.sh false
+        export DATA="${DATA_DIR}/test3"
+        export COMOUT=$DATA
         submit_test 03 12 1 15G 0:05:00 false C768.lndincsnow C768.lndincsnow.sh false
+        export DATA="${DATA_DIR}/test4"
+        export COMOUT=$DATA
         submit_test 04 12 1 15G 0:05:00 false C48.noahmp.coupled C48.noahmp.coupled.sh false
+        export DATA="${DATA_DIR}/test5"
+        export COMOUT=$DATA
         submit_test 05 12 1 15G 0:05:00 false C192.jedi_lndincsoilnoahmp C192.jedi_lndincsoilnoahmp.sh false
+        export DATA="${DATA_DIR}/test6"
+        export COMOUT=$DATA
         submit_test 06 12 1 15G 0:05:00 false C192.gsitile_lndincsoilnoahmp C192.gsitile_lndincsoilnoahmp.sh false
         ;;
     *)
@@ -182,6 +196,8 @@ else
     echo "Error: Unsupported scheduler '${SCHEDULER}'"
     exit 1
 fi
+
+submit_test end 1 1 100M 00:01:00 false summary tmp_sub.sh "${TEST_IDS[@]}"
 
 sleep_time=0
 echo "Waiting for ${test_name^^} tests to complete..."
