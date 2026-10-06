@@ -73,7 +73,9 @@ cmake ${CMAKE_FLAGS} ${CMAKE_OPTS} "${DIR_ROOT}"
 make -j "${BUILD_JOBS:-8}" VERBOSE="${BUILD_VERBOSE:-}"
 make install
 
-#ctest
-#ctest -I 4,5
+if [[ ${BUILD_TESTING:-OFF} == "ON" ]]; then
+  ctest
+  #ctest -I 4,5
+fi
 
 exit 0
