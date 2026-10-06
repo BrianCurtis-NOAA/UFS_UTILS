@@ -248,14 +248,27 @@ grep -a '^<<<' ${LOG_FILE}* | grep -v echo > ${SUM_FILE}
 EOF
 ) &
 elif [[ "${SCHEDULER}" == "slurm" ]]; then
-    (sbatch --nodes=1 -t 0:01:00 -A "${PROJECT_CODE}" ${slurmflag:+"${slurmflag}"} -J chgres_summary -o "${LOG_FILE}" -e "${LOG_FILE}" \
-       --open-mode=append -q "${QUEUE}" \
+  if [[ ${MACHINE_ID,,} == "nimbus" ]]; then
+    (sbatch --nodes=1 -t 0:01:00  ${slurmflag:+"${slurmflag}"} -J chgres_summary -o "${LOG_FILE}" -e "${LOG_FILE}" \
+       --open-mode=append \
        -d "afterany$(echo "${TEST_IDS[*]}" | tr -d '[:space:]')" << EOF
+
 #!/bin/bash
 cd ${this_dir}
 grep -a '^<<<' ${LOG_FILE}*  > ${SUM_FILE}
 EOF
 ) &
+  else
+    (sbatch --nodes=1 -t 0:01:00 -A "${PROJECT_CODE}" ${slurmflag:+"${slurmflag}"} -J chgres_summary -o "${LOG_FILE}" -e "${LOG_FILE}" \
+       --open-mode=append -q "${QUEUE}" \
+       -d "afterany$(echo "${TEST_IDS[*]}" | tr -d '[:space:]')" << EOF
+
+#!/bin/bash
+cd ${this_dir}
+grep -a '^<<<' ${LOG_FILE}*  > ${SUM_FILE}
+EOF
+) &
+  fi
 else
     echo "Error: Unsupported scheduler '${SCHEDULER}'"
     exit 1
