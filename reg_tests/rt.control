@@ -20,6 +20,7 @@ case ${MACHINE_ID,,} in
         QUEUE="batch"
         SCHEDULER="slurm"
         COMPILER="intelllvm"
+        PARTITION="hercules"
         ;;
     orion)
         WORK_DIR="/work/noaa/stmp/${LOGNAME}/ufs_utils"
@@ -28,6 +29,7 @@ case ${MACHINE_ID,,} in
         QUEUE="batch"
         SCHEDULER="slurm"
         COMPILER="intelllvm"
+        PARTITION="orion"
         ;;
     ursa)
         WORK_DIR="/scratch4/NCEPDEV/stmp/${LOGNAME}/ufs_utils"
@@ -36,6 +38,7 @@ case ${MACHINE_ID,,} in
         QUEUE="batch"
         SCHEDULER="slurm"
         COMPILER="intelllvm"
+        PARTITION="u1-compute"
         ;;
     gaeac6)
         WORK_DIR="/gpfs/f6/infra-cpu/scratch/${LOGNAME}/ufs_utils"
@@ -44,6 +47,8 @@ case ${MACHINE_ID,,} in
         QUEUE="normal"
         SCHEDULER="slurm"
         COMPILER="intelllvm"
+        PARTITION="c6"
+        SLURM_CLUSTER="c6"
         ;;
     wcoss2)
         WORK_DIR="/lfs/h2/emc/stmp/${LOGNAME}/ufs_utils"
@@ -52,6 +57,7 @@ case ${MACHINE_ID,,} in
         QUEUE="dev"
         SCHEDULER="pbs"
         COMPILER="intel"
+        PARTITION="dev"
         ;;
     nimbus)
         WORK_DIR="/home/${LOGNAME}/ufs_utils"
@@ -60,6 +66,7 @@ case ${MACHINE_ID,,} in
         QUEUE=""
         SCHEDULER="slurm"
         COMPILER="intelllvm"
+        PARTITION="compute"
 
         if [[ ${COMPILER} == "intelllvm" ]]; then
             module load pmix/5.0.11
@@ -73,7 +80,8 @@ case ${MACHINE_ID,,} in
 
             export FI_VERBS_INLINE_SIZE=39
             export FI_OFI_RXM_BUFFER_SIZE=4096
-            #export FI_UNIVERSE_SIZE=$SLURM_NTASKS
+            export FI_UNIVERSE_SIZE=$SLURM_NTASKS
+            export FI_OFI_RXM_SAR_LIMIT=2147483648
 
             export I_MPI_PIN_DOMAIN=numa
 
@@ -91,9 +99,9 @@ esac
 
 ##### TOGGLE JOBS #########
 RUN_CHGRES_CUBE="false"
-RUN_CPLD_GRIDGEN="true"
+RUN_CPLD_GRIDGEN="false"
 RUN_GLOBAL_CYCLE="false"
-RUN_GRID_GEN="false"
+RUN_GRID_GEN="true"
 RUN_ICE_BLEND="false"
 RUN_OCNICE_PREP="false"
 RUN_REGRID_SFC="false"
