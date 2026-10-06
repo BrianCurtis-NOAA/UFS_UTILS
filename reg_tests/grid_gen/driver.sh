@@ -58,7 +58,7 @@ submit_test() {
                 ${dep_flag_pbs:+"${dep_flag_pbs}"} "./${script}")
     elif [[ "${SCHEDULER}" == "slurm" ]]; then
         if [[ ${MACHINE_ID,,} == "nimbus" ]]; then
-            export APRUN="srun"
+            export APRUN="srun --mpi=pmi2"
             export APRUNCY=${APRUN}
             export APRUN_SFC=${APRUNCY}
             jobid=$(sbatch --parsable --partition="${partition}" ${slurmflag:+"${slurmflag}"} --ntasks-per-node="${ntasks_per_node}" --nodes="${nodes}" --mem="${mem}" -t "${walltime}" \
