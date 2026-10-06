@@ -58,8 +58,7 @@ submit_test() {
                 ${dep_flag_pbs:+"${dep_flag_pbs}"} "./${script}")
     elif [[ "${SCHEDULER}" == "slurm" ]]; then
         if [[ ${MACHINE_ID,,} == "nimbus" ]]; then
-            export APRUN="srun --mpi=pmi2"
-            export APRUNCY=${APRUN}
+            export APRUNCY="srun"
             export APRUN_SFC=${APRUNCY}
             jobid=$(sbatch --parsable --partition="${partition}" ${slurmflag:+"${slurmflag}"} --ntasks-per-node="${ntasks_per_node}" --nodes="${nodes}" --mem="${mem}" -t "${walltime}" \
                -J "${jobname}" --open-mode=append ${exclusive_flag:+"${exclusive_flag}"} \
@@ -114,7 +113,7 @@ fi
 LOG_FILE=consistency.log
 SUM_FILE=summary.log
 export home_dir=$PWD/../..
-# export APRUN=time
+export APRUN=time
 export this_dir=$PWD
 export OMP_STACKSIZE=2048m
 HOMEreg="${HOMEreg}/${test_name}"
