@@ -79,9 +79,9 @@ load(pathJoin("nccmp", nccmp_ver))
 
 load("openblas/0.3.33")
 
-setenv("CC", "icx")
-setenv("CXX", "icpx")
-setenv("FC", "ifx")
+setenv("CC", "mpiicx")
+setenv("CXX", "mpiicpx")
+setenv("FC", "mpiifx")
 setenv("CMAKE_Platform", "nimbus")
 
 whatis("Description: UFS_UTILS build environment")
