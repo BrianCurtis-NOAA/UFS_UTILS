@@ -171,13 +171,13 @@ case ${MACHINE_ID,,} in
         submit_test 07 30 1 40G 0:07:00 dev false false reg.gsl.gwd.24 regional.gsl.gwd.sh false
         ;;
     nimbus)
-        submit_test 01 30 1 40G 0:15:00 dev false false c96.uniform c96.uniform.sh false
-        # submit_test 02 30 1 250G 0:15:00 dev false false c96.viirs.bnu c96.viirs.bnu.sh false
-        # submit_test 03 30 1 40G 0:07:00 dev false false gfdl.regional gfdl.regional.sh false
-        # submit_test 04 30 1 40G 0:07:00 dev false false esg.regional esg.regional.sh false
-        # submit_test 05 30 1 40G 0:07:00 dev false false esg.regional.pct.cat esg.regional.pct.cat.sh false
-        # submit_test 06 15 1 40G 0:07:00 dev false false reg.gsl.gwd.12 regional.gsl.gwd.sh false
-        # submit_test 07 30 1 40G 0:07:00 dev false false reg.gsl.gwd.24 regional.gsl.gwd.sh false
+        submit_test 01 30 1 40G 0:15:00 compute false false c96.uniform c96.uniform.sh false
+        # submit_test 02 30 1 250G 0:15:00 compute false false c96.viirs.bnu c96.viirs.bnu.sh false
+        # submit_test 03 30 1 40G 0:07:00 compute false false gfdl.regional gfdl.regional.sh false
+        # submit_test 04 30 1 40G 0:07:00 compute false false esg.regional esg.regional.sh false
+        # submit_test 05 30 1 40G 0:07:00 compute false false esg.regional.pct.cat esg.regional.pct.cat.sh false
+        # submit_test 06 15 1 40G 0:07:00 compute false false reg.gsl.gwd.12 regional.gsl.gwd.sh false
+        # submit_test 07 30 1 40G 0:07:00 compute false false reg.gsl.gwd.24 regional.gsl.gwd.sh false
         ;;
     *)
         echo "Error: Unsupported machine '${MACHINE_ID}'"
