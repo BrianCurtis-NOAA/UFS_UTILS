@@ -164,6 +164,7 @@ case ${MACHINE_ID,,} in
         ;;
     nimbus)
         export DATA="${DATA_ROOT}/test01"
+        printf 'APRUN=<%s>\n' "$APRUN"
         submit_test 01 30 1 40G 0:15:00 false c96.uniform c96.uniform.sh false
         # export DATA="${DATA_ROOT}/test02"
         # submit_test 02 30 1 250G 0:15:00 false c96.viirs.bnu c96.viirs.bnu.sh false

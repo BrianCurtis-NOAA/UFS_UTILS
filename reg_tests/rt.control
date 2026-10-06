@@ -69,7 +69,7 @@ case ${MACHINE_ID,,} in
         PARTITION="compute"
 
         if [[ ${COMPILER} == "intelllvm" ]]; then
-            module load pmix/5.0.11
+            # module load pmix/5.0.11
 
             export I_MPI_HYDRA_IFACE=rdma0
             export FI_OFI_RXM_USE_ENV_ANY=1
@@ -86,10 +86,12 @@ case ${MACHINE_ID,,} in
             export I_MPI_PIN_DOMAIN=numa
 
             export I_MPI_DEBUG=5
+            
+            # export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi2.so
+            # export I_MPI_OFI_PROVIDER=tcp
         fi
 
-        # export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi2.so
-        # export I_MPI_OFI_PROVIDER=tcp
+        
         ;;
     *)
         echo "Error: Unsupported machine '${MACHINE_ID}'"
