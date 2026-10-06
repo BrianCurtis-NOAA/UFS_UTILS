@@ -57,12 +57,21 @@ submit_test() {
                 -N "${jobname}" -l select=${nodes}:ncpus=${ntasks_per_node}:ompthreads=${OMP_NUM_THREADS}:mem=${mem} \
                 ${dep_flag_pbs:+"${dep_flag_pbs}"} "./${script}")
     elif [[ "${SCHEDULER}" == "slurm" ]]; then
-        export APRUNCY="srun"
-        export APRUN_SFC=${APRUNCY}
-        jobid=$(sbatch --parsable --partition="${partition}" ${slurmflag:+"${slurmflag}"} --ntasks-per-node="${ntasks_per_node}" --nodes="${nodes}" --mem="${mem}" -t "${walltime}" \
+        if [[ ${MACHINE_ID,,} == "nimbus" ]]; then
+            export APRUNCY="srun"
+            export APRUN_SFC=${APRUNCY}
+            jobid=$(sbatch --parsable --partition="${partition}" ${slurmflag:+"${slurmflag}"} --ntasks-per-node="${ntasks_per_node}" --nodes="${nodes}" --mem="${mem}" -t "${walltime}" \
+               -J "${jobname}" --open-mode=append ${exclusive_flag:+"${exclusive_flag}"} \
+               --export=ALL,OMP_NUM_THREADS=${OMP_NUM_THREADS} ${dep_flag_slurm:+"${dep_flag_slurm}"} \
+               -o "${logfile}" -e "${logfile}" "./${script}")
+        else
+            export APRUNCY="srun"
+            export APRUN_SFC=${APRUNCY}
+            jobid=$(sbatch --parsable --partition="${partition}" ${slurmflag:+"${slurmflag}"} --ntasks-per-node="${ntasks_per_node}" --nodes="${nodes}" --mem="${mem}" -t "${walltime}" \
                -A "${PROJECT_CODE}" -q "${QUEUE}" -J "${jobname}" --open-mode=append ${exclusive_flag:+"${exclusive_flag}"} \
                --export=ALL,OMP_NUM_THREADS=${OMP_NUM_THREADS} ${dep_flag_slurm:+"${dep_flag_slurm}"} \
                -o "${logfile}" -e "${logfile}" "./${script}")
+        fi
     else
         echo "Error: Unsupported scheduler '${SCHEDULER}'"
         exit 1
@@ -161,6 +170,15 @@ case ${MACHINE_ID,,} in
         submit_test 06 15 1 40G 0:07:00 dev false false reg.gsl.gwd.12 regional.gsl.gwd.sh false
         submit_test 07 30 1 40G 0:07:00 dev false false reg.gsl.gwd.24 regional.gsl.gwd.sh false
         ;;
+    nimbus)
+        submit_test 01 30 1 40G 0:15:00 dev false false c96.uniform c96.uniform.sh false
+        # submit_test 02 30 1 250G 0:15:00 dev false false c96.viirs.bnu c96.viirs.bnu.sh false
+        # submit_test 03 30 1 40G 0:07:00 dev false false gfdl.regional gfdl.regional.sh false
+        # submit_test 04 30 1 40G 0:07:00 dev false false esg.regional esg.regional.sh false
+        # submit_test 05 30 1 40G 0:07:00 dev false false esg.regional.pct.cat esg.regional.pct.cat.sh false
+        # submit_test 06 15 1 40G 0:07:00 dev false false reg.gsl.gwd.12 regional.gsl.gwd.sh false
+        # submit_test 07 30 1 40G 0:07:00 dev false false reg.gsl.gwd.24 regional.gsl.gwd.sh false
+        ;;
     *)
         echo "Error: Unsupported machine '${MACHINE_ID}'"
         exit 1
@@ -179,13 +197,23 @@ grep -a '<<<' ${LOG_FILE}* | grep -v echo > $SUM_FILE
 EOF
   ) &
 elif [[ "${SCHEDULER}" == "slurm" ]]; then
-  (sbatch --nodes=1 -t 0:01:00 -A $PROJECT_CODE -J grid_summary ${slurmflag:+"${slurmflag}"} -o $LOG_FILE -e $LOG_FILE \
+    if [[ ${MACHINE_ID,,} == "nimbus" ]]; then
+        (sbatch --nodes=1 -t 0:01:00 --partition=compute -J grid_summary ${slurmflag:+"${slurmflag}"} -o $LOG_FILE -e $LOG_FILE \
+       --open-mode=append -d afterany$(echo "${TEST_IDS[*]}" | tr -d '[:space:]') << EOF
+#!/bin/bash
+cd ${this_dir}
+grep -a '<<<' ${LOG_FILE}*  > $SUM_FILE
+EOF
+  ) &
+    else
+        (sbatch --nodes=1 -t 0:01:00 -A $PROJECT_CODE -J grid_summary ${slurmflag:+"${slurmflag}"} -o $LOG_FILE -e $LOG_FILE \
        --open-mode=append -q $QUEUE -d afterany$(echo "${TEST_IDS[*]}" | tr -d '[:space:]') << EOF
 #!/bin/bash
 cd ${this_dir}
 grep -a '<<<' ${LOG_FILE}*  > $SUM_FILE
 EOF
   ) &
+    fi
 else
     echo "Error: Unsupported scheduler '${SCHEDULER}'"
     exit 1
