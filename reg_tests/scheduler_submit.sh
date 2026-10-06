@@ -90,7 +90,9 @@ submit_test() {
         fi
         jobid=$(qsub "${pbs_args[@]}" "./${script}")
     elif [[ "${SCHEDULER}" == "slurm" ]]; then
-        export APRUN="srun --mpi=pmi2"
+        # export APRUN="srun --mpi=pmi2"
+        export APRUN="srun"
+
         export APRUNCY="${APRUN}"
         export APRUN_SFC=${APRUNCY}
         # SLURM Items
