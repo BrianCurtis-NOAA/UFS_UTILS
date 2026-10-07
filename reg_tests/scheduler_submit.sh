@@ -92,9 +92,8 @@ submit_test() {
     elif [[ "${SCHEDULER}" == "slurm" ]]; then
         # export APRUN="srun --mpi=pmi2"
         export APRUN=${APRUN:-"srun"}
-
-        export APRUNCY="${APRUN}"
-        export APRUN_SFC=${APRUNCY}
+        export APRUNCY=${APRUNCY:-${APRUN}}
+        export APRUN_SFC=${APRUN_SFC:-${APRUNCY}}
         # SLURM Items
         local slurm_args=(--parsable)
         if [[ -n "${partition}" && "${partition}" != "false" ]]; then
