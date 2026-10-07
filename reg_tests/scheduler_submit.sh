@@ -43,7 +43,8 @@ submit_test() {
     if [[ "${SCHEDULER}" == "pbs" ]]; then
         export APRUN="mpiexec -n ${ntasks_per_node} -ppn ${ntasks_per_node} --cpu-bind core"
         export APRUNCY="${APRUN} --depth ${OMP_NUM_THREADS}"
-        export APRUN_SFC=${APRUNCY}
+        export APRUN_SFC=${APRUN_SFC:-${APRUNCY}}
+        export APRUN_REGRID=${APRUN_REGRID:-${APRUN}}
         local pbs_args=(-V)
         if [[ -n "${logfile}" && "${logfile}" != "false" ]]; then
             pbs_args+=(-o "${logfile}" -e "${logfile}")
@@ -94,6 +95,7 @@ submit_test() {
         export APRUN=${APRUN:-"srun"}
         export APRUNCY=${APRUNCY:-"srun --ntasks-per-node=${ntasks_per_node}"}
         export APRUN_SFC=${APRUN_SFC:-${APRUNCY}}
+        export APRUN_REGRID=${APRUN_REGRID:-${APRUN}}
         # SLURM Items
         local slurm_args=(--parsable)
         if [[ -n "${partition}" && "${partition}" != "false" ]]; then
