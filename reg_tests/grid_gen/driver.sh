@@ -164,20 +164,19 @@ case ${MACHINE_ID,,} in
         ;;
     nimbus)
         export DATA="${DATA_ROOT}/test01"
-        # export APRUN_SFC=${APRUNCY}
         submit_test 01 30 1 40G 0:15:00 false c96.uniform c96.uniform.sh false
-        # export DATA="${DATA_ROOT}/test02"
-        # submit_test 02 30 1 250G 0:15:00 false c96.viirs.bnu c96.viirs.bnu.sh false
-        # export DATA="${DATA_ROOT}/test03"
-        # submit_test 03 30 1 40G 0:07:00 false gfdl.regional gfdl.regional.sh false
-        # export DATA="${DATA_ROOT}/test04"
-        # submit_test 04 30 1 40G 0:07:00 false esg.regional esg.regional.sh false
-        # export DATA="${DATA_ROOT}/test05"
-        # submit_test 05 30 1 40G 0:07:00 false esg.regional.pct.cat esg.regional.pct.cat.sh false
-        # export DATA="${DATA_ROOT}/test06"
-        # submit_test 06 15 1 40G 0:07:00 false reg.gsl.gwd.12 regional.gsl.gwd.sh false
-        # export DATA="${DATA_ROOT}/test07"
-        # submit_test 07 30 1 40G 0:07:00 false reg.gsl.gwd.24 regional.gsl.gwd.sh false
+        export DATA="${DATA_ROOT}/test02"
+        submit_test 02 30 1 250G 0:15:00 false c96.viirs.bnu c96.viirs.bnu.sh false
+        export DATA="${DATA_ROOT}/test03"
+        submit_test 03 30 1 40G 0:07:00 false gfdl.regional gfdl.regional.sh false
+        export DATA="${DATA_ROOT}/test04"
+        submit_test 04 30 1 40G 0:07:00 false esg.regional esg.regional.sh false
+        export DATA="${DATA_ROOT}/test05"
+        submit_test 05 30 1 40G 0:07:00 false esg.regional.pct.cat esg.regional.pct.cat.sh false
+        export DATA="${DATA_ROOT}/test06"
+        submit_test 06 15 1 40G 0:07:00 false reg.gsl.gwd.12 regional.gsl.gwd.sh false
+        export DATA="${DATA_ROOT}/test07"
+        submit_test 07 30 1 40G 0:07:00 false reg.gsl.gwd.24 regional.gsl.gwd.sh false
         ;;
     *)
         echo "Error: Unsupported machine '${MACHINE_ID}'"
