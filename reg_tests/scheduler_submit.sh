@@ -150,6 +150,7 @@ submit_test() {
             exit 1
         fi
         TEST_IDS+=(":${jobid}")
+        echo ${jobid}
     fi
     export TEST_IDS
 }
