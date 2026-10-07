@@ -161,6 +161,7 @@ case ${MACHINE_ID,,} in
     nimbus)
         export OMP_NUM_THREADS_CY=2
         submit_test 01 1 1 5G 0:01:00 false ice_blend ice_blend.sh false
+        ;;
     *)
         echo "Error: Unsupported machine '${MACHINE_ID}'"
         exit 1
