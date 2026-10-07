@@ -41,7 +41,7 @@ submit_test() {
     export OMP_NUM_THREADS=${ntasks_per_node}  # should match cpus-per-task
 
     if [[ "${SCHEDULER}" == "pbs" ]]; then
-        export APRUN="mpiexec -n ${ntasks_per_node} -ppn ${ntasks_per_node} --cpu-bind core"
+        export APRUN="mpiexec -n ${ntasks_per_node} -ppn ${ntasks_per_node} --cpu-bind core ${APRUN_ADDITIONS}"
         export APRUNCY="${APRUN} --depth ${OMP_NUM_THREADS}"
         export APRUN_SFC=${APRUN_SFC:-${APRUNCY}}
         export APRUN_REGRID=${APRUN_REGRID:-${APRUN}}
@@ -92,8 +92,8 @@ submit_test() {
         jobid=$(qsub "${pbs_args[@]}" "./${script}")
     elif [[ "${SCHEDULER}" == "slurm" ]]; then
         # export APRUN="srun --mpi=pmi2"
-        export APRUN=${APRUN:-"srun"}
-        export APRUNCY=${APRUNCY:-"srun --ntasks-per-node=${ntasks_per_node}"}
+        export APRUN=${APRUN:-"srun ${APRUN_ADDITIONS}"}
+        export APRUNCY=${APRUNCY:-"${APRUN}--ntasks-per-node=${ntasks_per_node}"}
         export APRUN_SFC=${APRUN_SFC:-${APRUNCY}}
         export APRUN_REGRID=${APRUN_REGRID:-${APRUN}}
         # SLURM Items

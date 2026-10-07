@@ -115,6 +115,7 @@ export HOMEreg="${HOMEreg}/${test_name}"
 DATA_DIR="${WORK_DIR}/reg-tests/${test_name}"
 export NWPROD="${WORK_DIR}/UFS_UTILS"
 export DATA="${DATA_DIR}/test1"
+export APRUN="srun --mpi=pmi2"
 
 LOG_FILE=consistency.log
 SUM_FILE=summary.log
