@@ -231,7 +231,7 @@ while read -r line || [ "$line" ]; do
       SLURM_MEM=24g
     fi
 
-    submit_test ${i} ${NTASKS} 1 24G 0:${WLCLK}:00 false ${TEST_NAME} ocnice_prep.sh false
+    submit_test ${i} 1 1 24G 0:${WLCLK}:00 false ${TEST_NAME} ocnice_prep.sh false
     # if [[ ${MACHINE_ID} = wcoss2 ]]; then
 
     #   tests[$i]=$(qsub -V -o run_${TEST_NAME}.log -e run_${TEST_NAME}.log -q $QUEUE  -A $ACCOUNT \
