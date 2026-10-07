@@ -35,6 +35,7 @@ usage_and_exit() {
 }
 
 # Execution starts here.
+source ../scheduler_submit.sh
 
 set -x
 test_name="ocnice_prep"
