@@ -143,6 +143,7 @@ case ${MACHINE_ID,,} in
         submit_test 02 1 1 5G 0:03:00 false snow.global snow2mdl.global.sh "${jobkeep}"
         ;;
     nimbus)
+        export DATA="${DATA_ROOT}/test${suffix}"
         jobkeep=$(submit_test 01 1 1 5G 0:03:00 false snow.hemi snow2mdl.hemi.sh false)
         submit_test 02 1 1 5G 0:03:00 false snow.global snow2mdl.global.sh "${jobkeep}"
         ;;
