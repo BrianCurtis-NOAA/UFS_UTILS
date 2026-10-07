@@ -1,6 +1,9 @@
 #!/bin/bash
 
 submit_test() {
+    # the only echo should be the jobid of the last submitted job.
+    # The caller can capture this and use it for dependencies.
+
     # local suffix="$1"; shift
     # local ntasks_per_node="$1"; shift
     # local nodes="$1"; shift
