@@ -21,6 +21,7 @@ case ${MACHINE_ID,,} in
         SCHEDULER="slurm"
         COMPILER="intelllvm"
         PARTITION="hercules"
+        APRUN_ADDITIONS=""
         ;;
     orion)
         WORK_DIR="/work/noaa/stmp/${LOGNAME}/ufs_utils"
@@ -30,6 +31,7 @@ case ${MACHINE_ID,,} in
         SCHEDULER="slurm"
         COMPILER="intelllvm"
         PARTITION="orion"
+        APRUN_ADDITIONS=""
         ;;
     ursa)
         WORK_DIR="/scratch4/NCEPDEV/stmp/${LOGNAME}/ufs_utils"
@@ -39,6 +41,7 @@ case ${MACHINE_ID,,} in
         SCHEDULER="slurm"
         COMPILER="intelllvm"
         PARTITION="u1-compute"
+        APRUN_ADDITIONS=""
         ;;
     gaeac6)
         WORK_DIR="/gpfs/f6/infra-cpu/scratch/${LOGNAME}/ufs_utils"
@@ -49,6 +52,7 @@ case ${MACHINE_ID,,} in
         COMPILER="intelllvm"
         PARTITION="c6"
         SLURM_CLUSTER="c6"
+        APRUN_ADDITIONS=""
         ;;
     wcoss2)
         WORK_DIR="/lfs/h2/emc/stmp/${LOGNAME}/ufs_utils"
@@ -58,6 +62,7 @@ case ${MACHINE_ID,,} in
         SCHEDULER="pbs"
         COMPILER="intel"
         PARTITION="dev"
+        APRUN_ADDITIONS=""
         ;;
     nimbus)
         WORK_DIR="/home/${LOGNAME}/ufs_utils"
@@ -67,6 +72,7 @@ case ${MACHINE_ID,,} in
         SCHEDULER="slurm"
         COMPILER="intelllvm"
         PARTITION="compute"
+        APRUN_ADDITIONS="--mpi=pmi2"
 
         if [[ ${COMPILER} == "intelllvm" ]]; then
             # module load pmix/5.0.11
@@ -80,7 +86,7 @@ case ${MACHINE_ID,,} in
 
             export FI_VERBS_INLINE_SIZE=39
             export FI_OFI_RXM_BUFFER_SIZE=4096
-            export FI_UNIVERSE_SIZE=$SLURM_NTASKS
+            # export FI_UNIVERSE_SIZE=$SLURM_NTASKS
             export FI_OFI_RXM_SAR_LIMIT=2147483648
 
             export I_MPI_PIN_DOMAIN=numa
@@ -100,15 +106,15 @@ case ${MACHINE_ID,,} in
 esac
 
 ##### TOGGLE JOBS #########
-RUN_CHGRES_CUBE="false"
-RUN_CPLD_GRIDGEN="false"
-RUN_GLOBAL_CYCLE="false"
+RUN_CHGRES_CUBE="true"
+RUN_CPLD_GRIDGEN="true"
+RUN_GLOBAL_CYCLE="true"
 RUN_GRID_GEN="true"
-RUN_ICE_BLEND="false"
-RUN_OCNICE_PREP="false"
-RUN_REGRID_SFC="false"
-RUN_SNOW2MDL="false"
-RUN_WEIGHT_GEN="false"
+RUN_ICE_BLEND="true"
+RUN_OCNICE_PREP="true"
+RUN_REGRID_SFC="true"
+RUN_SNOW2MDL="true"
+RUN_WEIGHT_GEN="true"
 ###############
 
 # Where to send mail when job is completed?
