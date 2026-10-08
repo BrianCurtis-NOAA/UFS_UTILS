@@ -43,6 +43,7 @@ submit_test() {
 
     export OMP_NUM_THREADS=${ntasks_per_node}  # should match cpus-per-task
 
+    export DATA_ROOT=${DATA_ROOT:-""}
     export DATA="${DATA:-${DATA_ROOT}/test${logsuffix}}"
 
     if [[ "${SCHEDULER}" == "pbs" ]]; then
@@ -98,7 +99,7 @@ submit_test() {
     elif [[ "${SCHEDULER}" == "slurm" ]]; then
         # export APRUN="srun --mpi=pmi2"
         export APRUN=${APRUN:-"srun ${APRUN_ADDITIONS}"}
-        export APRUNCY=${APRUNCY:-"${APRUN}--ntasks-per-node=${ntasks_per_node}"}
+        export APRUNCY=${APRUNCY:-"${APRUN} --ntasks-per-node=${ntasks_per_node}"}
         export APRUN_SFC=${APRUN_SFC:-${APRUNCY}}
         export APRUN_REGRID=${APRUN_REGRID:-${APRUN}}
         # SLURM Items
