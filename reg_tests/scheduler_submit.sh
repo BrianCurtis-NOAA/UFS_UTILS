@@ -42,7 +42,7 @@ submit_test() {
     local logfile="${LOG_FILE}${logsuffix}"
 
     export OMP_NUM_THREADS=${ntasks_per_node}  # should match cpus-per-task
-
+    export APRUN_ADDITIONS=${APRUN_ADDITIONS:-""}
     export DATA_ROOT=${DATA_ROOT:-""}
     export DATA="${DATA:-${DATA_ROOT}/test${logsuffix}}"
 
@@ -99,9 +99,9 @@ submit_test() {
     elif [[ "${SCHEDULER}" == "slurm" ]]; then
         # export APRUN="srun --mpi=pmi2"
         export APRUN=${APRUN:-"srun ${APRUN_ADDITIONS}"}
-        export APRUNCY=${APRUNCY:-"${APRUN}"}
-        export APRUN_SFC=${APRUN_SFC:-"${APRUN}"}
-        export APRUN_REGRID=${APRUN_REGRID:-"${APRUN}"}
+        export APRUNCY=${APRUNCY:-"srun ${APRUN_ADDITIONS}"}
+        export APRUN_SFC=${APRUN_SFC:-"srun ${APRUN_ADDITIONS}"}
+        export APRUN_REGRID=${APRUN_REGRID:-"srun ${APRUN_ADDITIONS}"}
         # SLURM Items
         local slurm_args=(--parsable)
         if [[ -n "${partition}" && "${partition}" != "false" ]]; then
