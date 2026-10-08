@@ -43,7 +43,7 @@ submit_test() {
 
     export OMP_NUM_THREADS=${ntasks_per_node}  # should match cpus-per-task
 
-    export DATA="${DATA:-${DATA_DIR}/test${logsuffix}}"
+    export DATA="${DATA:-${DATA_ROOT}/test${logsuffix}}"
 
     if [[ "${SCHEDULER}" == "pbs" ]]; then
         export APRUN="mpiexec -n ${ntasks_per_node} -ppn ${ntasks_per_node} --cpu-bind core ${APRUN_ADDITIONS}"

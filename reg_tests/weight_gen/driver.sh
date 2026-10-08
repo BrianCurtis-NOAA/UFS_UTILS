@@ -96,7 +96,11 @@ else
 fi
 
 test_name="weight_gen"
-export DATA="${WORK_DIR}/reg_tests/${test_name}"
+# export DATA="${WORK_DIR}/reg_tests/${test_name}"
+DATA_ROOT="${WORK_DIR:-/scratch4/NCEPDEV/stmp/$LOGNAME}"
+DATA_ROOT="${DATA_ROOT}/reg-tests/${test_name}"
+
+rm -fr $DATA_ROOT
 LOG_FILE=consistency.log
 SUM_FILE=summary.log
 
